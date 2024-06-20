@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+.pytest_cache/
+.cache/

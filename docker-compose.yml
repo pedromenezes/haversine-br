@@ -1,0 +1,39 @@
+services:
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - "6379:6379"
+
+  data_processor:
+    build:
+      context: .
+      dockerfile: Dockerfile.process
+    container_name: data-processor
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+    command: ["python", "scripts/process_data.py"]
+    deploy:
+      resources:
+        limits:
+          memory: 2g 
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - data_processor
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    deploy:
+      resources:
+        limits:
+          memory: 1g 

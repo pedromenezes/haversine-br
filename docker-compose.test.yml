@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  redis_test:
+    image: "redis:alpine"
+    container_name: redis-test
+    ports:
+      - "6380:6379"
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: api-test
+    depends_on:
+      - redis_test
+    environment:
+      - REDIS_HOST=redis-test
+    volumes:
+      - .:/app
