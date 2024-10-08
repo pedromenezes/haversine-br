@@ -25,6 +25,18 @@ class NearestCitiesResponse(BaseModel):
     unit: str = "km"
 
 
+@app.get("/cities", response_model=List[str])
+def list_cities():
+    """
+    Lista todas as cidades disponíveis no sistema.
+    """
+    cities = set()
+    for key in redis_client.scan_iter("distances:*"):
+        city = key.decode("utf-8").split(":")[1]
+        cities.add(city)
+    return sorted(list(cities))
+    
+
 @app.get("/nearest_cities/{city_name}", response_model=NearestCitiesResponse)
 def get_nearest_cities(
     city_name: str,

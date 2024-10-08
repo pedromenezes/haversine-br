@@ -30,9 +30,18 @@ A API estará disponível em http://localhost:8000.
 ### Endpoints Disponíveis
 
 - **GET /**: Endpoint raiz que retorna uma mensagem de boas-vindas.
+- **GET /cities**: Lista todas as cidades disponíveis no sistema.
 - **GET /nearest_cities/{city_name}**: Retorna as cidades mais próximas da cidade especificada.
 
 ## Exemplo de Requisição
+
+Para listar todas as cidades disponíveis no sistema:
+
+```
+curl -X 'GET' \
+  'http://localhost:8000/cities' \
+  -H 'accept: application/json'
+```
 
 Para obter as cidades mais próximas de uma cidade específica:
 
@@ -41,6 +50,7 @@ curl -X 'GET' \
   'http://localhost:8000/nearest_cities/Niterói?max_results=5' \
   -H 'accept: application/json'
 ```
+
 
 ## Executando os Testes
 
