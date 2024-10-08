@@ -38,7 +38,7 @@ Para obter as cidades mais próximas de uma cidade específica:
 
 ```
 curl -X 'GET' \
-  'http://localhost:8000/nearest_cities/Sao_Paulo?max_results=5' \
+  'http://localhost:8000/nearest_cities/Niterói?max_results=5' \
   -H 'accept: application/json'
 ```
 
